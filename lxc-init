@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# enable colorful terminal
+sed -i 's/#force_color_prompt=yes/force_color_prompt=yes/' ~/.bashrc
+
+# update the machine
+apt update
+apt -y dist-upgrade
+
+# periodic security updated
+echo '' >> /etc/crontab
+echo '@hourly root apt update && unattended-upgrade' | tee -a /etc/crontab
+
+# Install some useful stuff
+apt install man-db vim git ufw htop iotop bash-completion iftop unattended-upgrades
+dpkg-reconfigure bash-completion
+
+# enable the firewall (you'll have to open where applicable)
+ufw enable
+
+# use strong certs
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -q -N ''
+ssh-keygen -t ecdsa -b 521 -f ~/.ssh/id_rsa -q -N ''
+
+
+rm /etc/ssh/ssh_host_*
+ssh-keygen -t rsa -b 4096 -f /etc/ssh/ssh_host_rsa_key -q -N ''
+ssh-keygen -t ecdsa -b 521 -f /etc/ssh/ssh_host_ecdsa_key -q -N ''
+
+echo 'KexAlgorithms curve25519-sha256@libssh.org' | tee -a /etc/ssh/sshd_config
+service ssh restart
+
