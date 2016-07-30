@@ -12,8 +12,10 @@ echo '' >> /etc/crontab
 echo '@hourly root apt update && unattended-upgrade' | tee -a /etc/crontab
 
 # Install some useful stuff
-apt install man-db vim git ufw htop iotop bash-completion iftop unattended-upgrades
+apt -y install man-db vim git ufw htop iotop bash-completion iftop unattended-upgrades
 dpkg-reconfigure bash-completion
+
+apt -y autoremove
 
 # enable the firewall (you'll have to open where applicable)
 ufw enable
