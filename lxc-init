@@ -21,7 +21,7 @@ apt -y autoremove
 ufw enable
 
 # use strong certs
-rm -rf ~/.ssh/*
+rm -rf ~/.ssh
 mkdir ~/.ssh
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -q -N ''
 ssh-keygen -t ecdsa -b 521 -f ~/.ssh/id_ecdsa -q -N ''
