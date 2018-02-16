@@ -31,7 +31,7 @@ rm -rf ~/.ssh
 mkdir ~/.ssh
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -q -N ''
 ssh-keygen -t ecdsa -b 521 -f ~/.ssh/id_ecdsa -q -N ''
-ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -q -n ''
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -q -N ''
 
 
 rm /etc/ssh/ssh_host_*
