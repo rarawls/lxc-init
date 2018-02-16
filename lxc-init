@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Ensure script is being run by root!
+if [[ $EUID -ne 0 ]]; then
+  echo "This script must be run as root" 
+  exit 1
+fi
+
 # enable colorful terminal
 sed -i 's/#force_color_prompt=yes/force_color_prompt=yes/' ~/.bashrc
 
