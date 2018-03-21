@@ -34,9 +34,9 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -q -N ''
 ssh-keygen -t ecdsa -b 521 -f ~/.ssh/id_ecdsa -q -N ''
 ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -q -N ''
 
-#rm /etc/ssh/ssh_host_*
 mkdir /etc/ssh/bak
-mv /etc/ssh/ssh_host_* /etc/ssh/bak/
+rsync -a /etc/ssh/ssh_host_* /etc/ssh/bak/
+rm /etc/ssh/ssh_host_*
 ssh-keygen -t rsa -b 4096 -f /etc/ssh/ssh_host_rsa_key -q -N ''
 ssh-keygen -t ecdsa -b 521 -f /etc/ssh/ssh_host_ecdsa_key -q -N ''
 ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -q -N ''
