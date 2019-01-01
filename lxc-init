@@ -18,7 +18,7 @@ echo '' >> /etc/crontab
 echo '@hourly root apt update && unattended-upgrade' | tee -a /etc/crontab
 
 # Install some useful stuff
-apt -y install man-db vim git ufw htop iotop bash-completion iftop unattended-upgrades
+apt -y install apt-transport-https man-db vim git ufw htop iotop bash-completion iftop unattended-upgrades
 dpkg-reconfigure bash-completion
 
 apt -y autoremove
