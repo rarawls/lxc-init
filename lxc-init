@@ -6,8 +6,20 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
-# enable colorful terminal
-sed -i 's/#force_color_prompt=yes/force_color_prompt=yes/' ~/.bashrc
+# enable colorful terminal (first ubuntu, then debian)
+sed -i "s/#force_color_prompt=yes/force_color_prompt=yes/" ~/.bashrc
+sed -i "s/# export LS_OPTIONS='--color=auto'/export LS_OPTIONS='--color=auto'/" ~/.bashrc
+
+# enable unbounded bash history (ubuntu)
+sed -i "/HISTSIZE/c\HISTSIZE=-1" ~/.bashrc
+sed -i "/HISTFILESIZE/c\HISTFILESIZE=-1" ~/.bashrc
+
+# enable unbounded bash history (debian)
+flavor=`cat /etc/os-release | grep ^ID= | sed 's/ID=//'`
+if [ "$flavor" = "debian" ]; then
+  echo "HISTSIZE=-1" | tee -a ~/.bashrc
+  echo "HISTFILESIZE=-1" | tee -a ~/.bashrc
+fi
 
 # update the machine
 apt update
